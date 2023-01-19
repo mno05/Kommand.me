@@ -1,5 +1,8 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kommad_me/Vue/MainVue.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,65 +16,55 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Kommand.me',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashSCren(title: "",),
+      home: SplashScreen(),
     );
   }
 }
 
-class SplashSCren extends StatefulWidget {
-  const SplashSCren({super.key, required this.title});
-  final String title;
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SplashSCren> createState() => _SplashSCrenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashSCrenState extends State<SplashSCren> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
     ]);
- }
-
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return AnimatedSplashScreen(
+          duration: 3000,
+          splash: "img/logo.png",
+          splashIconSize: MediaQuery.of(context).size.height*0.8,
+          nextScreen: MainVue(),
+          splashTransition: SplashTransition.sizeTransition,
+          pageTransitionType: PageTransitionType.bottomToTop,
+          backgroundColor: Colors.black);
   }
 }
+
+// class SplashSCreen extends StatelessWidget {
+//   const SplashSCreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedSplashScreen(
+//             duration: 3000,
+//             splash: Icons.home,
+//             nextScreen: MainVue(),
+//             splashTransition: SplashTransition.fadeTransition,
+//             pageTransitionType: PageTransitionType.leftToRightPop,
+//             backgroundColor: Colors.blue);
+//   }
+// }
+
