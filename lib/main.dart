@@ -12,24 +12,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Kommand.me',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SplashSCren(title: "",),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class SplashSCren extends StatefulWidget {
+  const SplashSCren({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SplashSCren> createState() => _SplashSCrenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SplashSCrenState extends State<SplashSCren> {
   int _counter = 0;
 
   void _incrementCounter() {
