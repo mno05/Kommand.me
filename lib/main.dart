@@ -53,18 +53,4 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// class SplashSCreen extends StatelessWidget {
-//   const SplashSCreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedSplashScreen(
-//             duration: 3000,
-//             splash: Icons.home,
-//             nextScreen: MainVue(),
-//             splashTransition: SplashTransition.fadeTransition,
-//             pageTransitionType: PageTransitionType.leftToRightPop,
-//             backgroundColor: Colors.blue);
-//   }
-// }
 
