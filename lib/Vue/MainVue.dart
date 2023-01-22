@@ -36,6 +36,7 @@ class _MainVueState extends State<MainVue> {
             hintText: "Effectuez une recherche",
             hintStyle: TextStyle(
               fontSize: 12,
+              fontFamily: "Milky",
             ),
             border: InputBorder.none,
           ),
@@ -72,65 +73,112 @@ class _MainVueState extends State<MainVue> {
             ),
           ),
           body: SingleChildScrollView(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 3,
-                width: Media.width(context),
-                color: Color(0xffff8a00),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12.0, bottom: 8.0),
-                child: Text(
-                  "Services",
-                  style: TextStyle(
-                    fontSize: Media.width(context) * 0.05,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 3,
+                  width: Media.width(context),
+                  color: Color(0xffff8a00),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 12.0, bottom: 8.0, top: 2),
+                  child: Text(
+                    "Services",
+                    style: TextStyle(
+                      fontSize: Media.width(context) * 0.05,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Milky",
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: Media.width(context)*0.005),
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.black38,
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    child: Icon(
-                      Icons.chevron_left,
-                      color: Colors.white,
-                      size: 25,
-                    ),
+                SizedBox(
+                  height: Media.height(context) * 0.6,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: Media.width(context) * 0.005),
+                            height: 100,
+                            decoration: BoxDecoration(
+                                color: Colors.black38,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Icon(
+                              Icons.chevron_right,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                          ),
+                          SpecialContainer(
+                            context,
+                            image: "img/optimus.jpeg",
+                            color: Colors.blue,
+                            firstName: "OPTIMUS",
+                            secondName: "CORP",
+                          ),
+                          SpecialContainer(
+                            context,
+                            image: "img/TNK.jpeg",
+                            color: Colors.yellow,
+                            firstName: "TNK",
+                            secondName: "",
+                          ),
+                          SpecialContainer(
+                            context,
+                            image: "img/Ecobank.jpeg",
+                            color: Colors.pink,
+                            firstName: "EcoBank",
+                            secondName: "Chanllenge",
+                          ),
+                          SpecialContainer(
+                            context,
+                            image: "img/test.jpeg",
+                            color: Colors.blue,
+                            firstName: "MEMORIOM",
+                            secondName: "CORP",
+                          ),
+                          // SpecialContainer(context),
+                          // SpecialContainer(context),
+                          // SpecialContainer(context),
+                          // SpecialContainer(context),
+                          // SpecialContainer(context),
+                          Container(
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.black38,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(
+                              Icons.chevron_left,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  SpecialContainer(context),
-                  SpecialContainer(context),
-                  SpecialContainer(context),
-                  Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                    color: Colors.black38,
-                    borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Icon(
-                      Icons.chevron_right,
-                      color: Colors.white,
-                      size: 25,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          )),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget SpecialContainer(BuildContext context) {
+  Widget SpecialContainer(
+    BuildContext context, {
+    required String image,
+    required Color color,
+    required String firstName,
+    String secondName = "",
+  }) {
     double h = Media.height(context);
     double w = Media.height(context);
 
@@ -139,10 +187,8 @@ class _MainVueState extends State<MainVue> {
       height: Media.height(context) * 0.65,
       width: Media.width(context) * 0.29,
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        image: DecorationImage(
-            image: AssetImage("img/test.jpeg"), fit: BoxFit.cover),
+        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -151,7 +197,7 @@ class _MainVueState extends State<MainVue> {
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [
-                Color(0xffff8a00),
+                color,
                 Colors.transparent,
               ],
             )),
@@ -167,26 +213,27 @@ class _MainVueState extends State<MainVue> {
                 )),
             Positioned(
               bottom: 11,
-              left: 10 + 10,
+              left: 20,
               child: Container(
-                transform: Matrix4.rotationZ(0),
+                // transform: Matrix4.rotationZ(-0.11),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "OPTIMUS",
-                      style: GoogleFonts.niconne(
+                      firstName,
+                      style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 23,
+                        fontFamily: "Tommy",
                       ),
                     ),
                     Text(
-                      "CORP",
+                      secondName,
                       style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
+                        fontSize: 23,
+                        fontFamily: "Tommy",
                       ),
                     ),
                   ],
