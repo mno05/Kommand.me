@@ -1,0 +1,8 @@
+{
+    "editor.tokenColorCustomizations": {
+    // "comments": "#FF0000"
+
+    },
+    "files.autoSave": "afterDelay",
+    "dart.showInspectorNotificationsForWidgetErrors": true
+}
