@@ -1,6 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kommad_me/Data/Services.dart';
+import 'package:kommad_me/Widgets/SpecialContainer.dart';
 import 'package:kommad_me/tools/Media.dart';
 
 class MainVue extends StatefulWidget {
@@ -16,6 +19,11 @@ class _MainVueState extends State<MainVue> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight]);
     super.initState();
   }
+
+  Widget buildConatiner(Cont) => Container(
+        margin: EdgeInsets.symmetric(horizontal: 0),
+        child: Cont,
+      );
 
   Widget search() {
     return Container(
@@ -35,9 +43,9 @@ class _MainVueState extends State<MainVue> {
             ),
             hintText: "Effectuez une recherche",
             hintStyle: TextStyle(
-              fontSize: 12,
-              fontFamily: "Milky",
-            ),
+                fontSize: 12,
+                // fontFamily: "Milky",
+                fontWeight: FontWeight.bold),
             border: InputBorder.none,
           ),
         ),
@@ -96,151 +104,59 @@ class _MainVueState extends State<MainVue> {
                 ),
                 SizedBox(
                   height: Media.height(context) * 0.6,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: Media.width(context) * 0.005),
-                            height: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.black38,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Icon(
-                              Icons.chevron_right,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                          ),
-                          SpecialContainer(
-                            context,
-                            image: "img/optimus.jpeg",
-                            color: Colors.blue,
-                            firstName: "OPTIMUS",
-                            secondName: "CORP",
-                          ),
-                          SpecialContainer(
-                            context,
-                            image: "img/TNK.jpeg",
-                            color: Colors.yellow,
-                            firstName: "TNK",
-                            secondName: "",
-                          ),
-                          SpecialContainer(
-                            context,
-                            image: "img/Ecobank.jpeg",
-                            color: Colors.pink,
-                            firstName: "EcoBank",
-                            secondName: "Chanllenge",
-                          ),
-                          SpecialContainer(
-                            context,
-                            image: "img/test.jpeg",
-                            color: Colors.blue,
-                            firstName: "MEMORIOM",
-                            secondName: "CORP",
-                          ),
-                          // SpecialContainer(context),
-                          // SpecialContainer(context),
-                          // SpecialContainer(context),
-                          // SpecialContainer(context),
-                          // SpecialContainer(context),
-                          Container(
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.black38,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Icon(
-                              Icons.chevron_left,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+
+                  child: CarouselSlider.builder(
+                      itemCount: Service.Services(context).length,
+                      itemBuilder: (context, index, realIndex) {
+                        // return Service.Services()[index];
+                        return buildConatiner(Service.Services(context)[index]);
+                      },
+                      options: CarouselOptions(
+                          height: Media.height(context),
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          disableCenter: true,
+                          aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          viewportFraction: Media.width(context)*0.00045,
+                          scrollDirection: Axis.horizontal)),
+
+                  // child: Row(
+                  //   children: [
+                  //     // Container(
+                  //     //   margin:
+                  //     //       EdgeInsets.only(left: Media.width(context) * 0.005),
+                  //     //   height: 100,
+                  //     //   decoration: BoxDecoration(
+                  //     //       color: Colors.black38,
+                  //     //       borderRadius: BorderRadius.circular(20)),
+                  //     //   child: Icon(
+                  //     //     Icons.chevron_right,
+                  //     //     color: Colors.white,
+                  //     //     size: 25,
+                  //     //   ),
+                  //     // ),
+                  //     Container(
+                  //       height: 100,
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.black38,
+                  //         borderRadius: BorderRadius.circular(20),
+                  //       ),
+                  //       child: Icon(
+                  //         Icons.chevron_left,
+                  //         color: Colors.white,
+                  //         size: 25,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 )
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget SpecialContainer(
-    BuildContext context, {
-    required String image,
-    required Color color,
-    required String firstName,
-    String secondName = "",
-  }) {
-    double h = Media.height(context);
-    double w = Media.height(context);
-
-    return Container(
-      margin: EdgeInsets.only(left: w * 0.013, right: w * 0.013),
-      height: Media.height(context) * 0.65,
-      width: Media.width(context) * 0.29,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                color,
-                Colors.transparent,
-              ],
-            )),
-        child: Stack(
-          children: [
-            Positioned(
-                bottom: 11,
-                left: 10,
-                child: Container(
-                  height: 60,
-                  width: 8,
-                  color: Colors.blue,
-                )),
-            Positioned(
-              bottom: 11,
-              left: 20,
-              child: Container(
-                // transform: Matrix4.rotationZ(-0.11),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      firstName,
-                      style: TextStyle(
-                        color: Colors.white,
-                        // fontWeight: FontWeight.bold,
-                        fontSize: 23,
-                        fontFamily: "Tommy",
-                      ),
-                    ),
-                    Text(
-                      secondName,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 23,
-                        fontFamily: "Tommy",
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
         ),
       ),
     );

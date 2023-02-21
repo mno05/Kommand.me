@@ -1,7 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kommad_me/Data/Services.dart';
 import 'package:kommad_me/Vue/MainVue.dart';
+import 'package:kommad_me/Vue/ServiceDetails.dart';
 import 'package:page_transition/page_transition.dart';
 
 void main() {
@@ -46,9 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
           duration: 3000,
           splash: "img/logo.png",
           splashIconSize: MediaQuery.of(context).size.height*0.8,
-          nextScreen: MainVue(),
-          splashTransition: SplashTransition.sizeTransition,
-          pageTransitionType: PageTransitionType.bottomToTop,
+          nextScreen: MainVue (),
+          splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.black);
   }
 }
